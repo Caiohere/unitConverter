@@ -2,7 +2,6 @@ package com.example.unitconverter
 
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -15,27 +14,29 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Button
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.AlignmentLine
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.Placeholder
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.em
 import com.example.unitconverter.ui.theme.UnitConverterTheme
 
 class MainActivity : ComponentActivity() {
@@ -57,9 +58,18 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun UnitConverter(){
+
+    var inputValue by remember { mutableStateOf("") }
+    var outputValue by remember { mutableStateOf("") }
+    var inputUnit by remember { mutableStateOf("Select") }
+    var outputUnit by remember { mutableStateOf("Select") }
+    var iExpanded by remember { mutableStateOf(false) }
+    var oExpanded by remember { mutableStateOf(false) }
+
+
     Column(
         Modifier
-            //.padding(top = 20.dp)
+            .padding(8.dp)
             .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -67,16 +77,18 @@ fun UnitConverter(){
     {
 
         Text(
-            text = "Unit Converter",
-            //modifier = Modifier.padding(40.dp)
+            text = "Unit Converter"
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         OutlinedTextField(
-            value = "",
+            value = inputValue,
+            label = {Text("Enter Value")},
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+            singleLine = true,
             onValueChange = {
-                // Here goes what should happen when the value is changed on the text field
+                inputValue = it
             }
 
         )
@@ -87,12 +99,36 @@ fun UnitConverter(){
             Box(){
                 Button(
                     onClick = {
-
-                    }
-                )
-                {
-                    Text("Select")
+                        iExpanded = !iExpanded
+                    },
+                    enabled = true
+                ) {
+                    Text(inputUnit)
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
+                }
+
+                DropdownMenu(expanded = iExpanded, onDismissRequest = { iExpanded = false}) {
+                    DropdownMenuItem(
+                        text = { Text("Centimeters") },
+                        onClick = {
+                            inputUnit = "Centimeters"
+                            iExpanded = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Meters") },
+                        onClick = {
+                            inputUnit = "Meters"
+                            iExpanded = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Millimeters") },
+                        onClick = {
+                            inputUnit = "Milimeters"
+                            iExpanded = false
+                        }
+                    )
                 }
             }
 
@@ -101,13 +137,39 @@ fun UnitConverter(){
             Box(){
                 Button(
                     onClick = {
-
-                    }
-                )
-                {
-                    Text("Select")
+                        oExpanded = !oExpanded
+                    },
+                    enabled = true
+                ) {
+                    Text(outputUnit)
                     Icon(Icons.Default.ArrowDropDown, contentDescription = "Arrow Down")
                 }
+
+
+                DropdownMenu(expanded = oExpanded, onDismissRequest = { oExpanded = false}) {
+                    DropdownMenuItem(
+                        text = {Text("Centimeters")},
+                        onClick = {
+                            outputUnit = "Centimeters"
+                            oExpanded = false
+                        },
+                    )
+                    DropdownMenuItem(
+                        text = {Text("Meters")},
+                        onClick = {
+                            outputUnit = "Meters"
+                            oExpanded = false
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = {Text("Millimeters")},
+                        onClick = {
+                            outputUnit = "Milimeters"
+                            oExpanded = false
+                        }
+                    )
+                }
+
             }
         }
 
@@ -124,12 +186,6 @@ fun UnitConverter(){
 }
 
 
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    if (!name.isEmpty()) Text(text = "Hello $name!", modifier = modifier) else Text(text = "", modifier = modifier)
-
-}
 
 
 

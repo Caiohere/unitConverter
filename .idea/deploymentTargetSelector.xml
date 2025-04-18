@@ -18,10 +18,10 @@
       </SelectionState>
       <SelectionState runConfigName="UnitConverterPreview">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2025-04-14T02:29:05.193035300Z">
+        <DropdownSelection timestamp="2025-04-18T14:22:07.611476Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="PhysicalDevice" identifier="serial=RQCX8028PPB" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\caioh\.android\avd\Pixel_8.avd" />
             </handle>
           </Target>
         </DropdownSelection>
