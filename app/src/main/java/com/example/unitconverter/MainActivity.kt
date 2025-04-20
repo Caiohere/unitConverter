@@ -78,7 +78,7 @@ fun UnitConverter(){
     fun convertUnits(){
         //Convert commas to dots (because of american format) then make it Double anyways
         var inputValueDouble = inputValue
-        inputValueDouble = inputValueDouble.replace(oldValue = ".", newValue = "").replace(oldValue = ",", newValue = ".")
+        inputValueDouble = inputValueDouble.replace(oldValue = ",", newValue = ".")
         inputValueDouble.toDoubleOrNull() ?: 0.00
         outputValue = (inputValueDouble.toDouble() * iConverterFactor * 100 / oConverterFactor) / 100
     }
@@ -107,7 +107,7 @@ fun UnitConverter(){
             singleLine = true,
             onValueChange = {
                 inputValue = it
-                if (iConverterFactor != 00.0 && oConverterFactor != 00.0) convertUnits()
+                if (iConverterFactor != 00.0 && oConverterFactor != 00.0 && inputValue != "") convertUnits() else outputValue = 00.0
             }
 
         )
@@ -131,21 +131,21 @@ fun UnitConverter(){
 
                 DropdownMenu(expanded = iExpanded, onDismissRequest = { iExpanded = false}) {
                     DropdownMenuItem(
-                        text = { Text("Centimeters") },
-                        onClick = {
-                            inputUnit = "Centimeters"
-                            iExpanded = false
-                            iConverterFactor = 0.01
-                            if (oConverterFactor != 00.0) convertUnits()
-                        }
-                    )
-                    DropdownMenuItem(
                         text = { Text("Meters") },
                         onClick = {
                             inputUnit = "Meters"
                             iExpanded = false
                             iConverterFactor = 1.00
-                            if (oConverterFactor != 00.0) convertUnits()
+                            if (oConverterFactor != 00.0 && inputValue != "") convertUnits()
+                        }
+                    )
+                    DropdownMenuItem(
+                        text = { Text("Centimeters") },
+                        onClick = {
+                            inputUnit = "Centimeters"
+                            iExpanded = false
+                            iConverterFactor = 0.01
+                            if (oConverterFactor != 00.0 && inputValue != "") convertUnits()
                         }
                     )
                     DropdownMenuItem(
@@ -154,7 +154,7 @@ fun UnitConverter(){
                             inputUnit = "Millimeters"
                             iExpanded = false
                             iConverterFactor = 0.001
-                            if ( oConverterFactor != 00.0) convertUnits()
+                            if ( oConverterFactor != 00.0 && inputValue != "") convertUnits()
                         }
                     )
                 }
@@ -177,22 +177,22 @@ fun UnitConverter(){
 
                 DropdownMenu(expanded = oExpanded, onDismissRequest = { oExpanded = false}) {
                     DropdownMenuItem(
-                        text = {Text("Centimeters")},
-                        onClick = {
-                            outputUnit = "Centimeters"
-                            oExpanded = false
-                            oConverterFactor = 0.01
-                            if (iConverterFactor != 00.0) convertUnits()
-                        },
-                    )
-                    DropdownMenuItem(
                         text = {Text("Meters")},
                         onClick = {
                             outputUnit = "Meters"
                             oExpanded = false
                             oConverterFactor = 1.00
-                            if (iConverterFactor != 00.0) convertUnits()
+                            if (iConverterFactor != 00.0 && inputValue != "") convertUnits()
                         }
+                    )
+                    DropdownMenuItem(
+                        text = {Text("Centimeters")},
+                        onClick = {
+                            outputUnit = "Centimeters"
+                            oExpanded = false
+                            oConverterFactor = 0.01
+                            if (iConverterFactor != 00.0 && inputValue != "") convertUnits()
+                        },
                     )
                     DropdownMenuItem(
                         text = {Text("Millimeters")},
@@ -200,7 +200,7 @@ fun UnitConverter(){
                             outputUnit = "Millimeters"
                             oExpanded = false
                             oConverterFactor = 0.001
-                            if (iConverterFactor != 00.0) convertUnits()
+                            if (iConverterFactor != 00.0 && inputValue != "") convertUnits()
                         }
                     )
                 }
