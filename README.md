@@ -1,15 +1,21 @@
-# MyApp
+# UnitConverter / ConversorDeMedidas
 
-Aplicativo Android feito com Kotlin e Jetpack Compose.
-Android Application made with Kotlin and Jetpack Compose
+Aplicativo Android desenvolvido com **Kotlin** e **Jetpack Compose**.
 
-## Tecnologias
-- Kotlin
-- Jetpack Compose
-- Android Studio
+Android application built using **Kotlin** and **Jetpack Compose**.
 
-## Como rodar
-1. Clone o repositório
-2. Abra no Android Studio
-3. Sincronize o Gradle
-4. Rode o app no emulador ou dispositivo físico
+> Este projeto faz parte do meu processo contínuo de aprendizado em desenvolvimento Android.  
+> This project is part of my ongoing journey to improve as an Android developer.
+
+Curso de apoio:  
+Support course: _The Complete Android 14 & Kotlin Development Masterclass_ by **Denis Panjuta**.
+
+---
+
+## 🚀 Tecnologias | Technologies
+- [Kotlin](https://kotlinlang.org/)
+- [Jetpack Compose](https://developer.android.com/jetpack/compose)
+- [Android Studio](https://developer.android.com/studio)
+
+
+
